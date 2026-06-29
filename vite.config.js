@@ -7,4 +7,5 @@ export default defineConfig({
   server: {
     open: true,
   },
+  base: "/school-ordering-website/",
 });
