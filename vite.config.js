@@ -8,4 +8,12 @@ export default defineConfig({
     open: true,
   },
   base: "/school-ordering-website/",
+
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "/src/scss/variables.scss" as *;`,
+      },
+    },
+  },
 });
