@@ -27,14 +27,19 @@ export default{
           </div>
           <div class="nav-link">
             <router-link to="/cart" class="nav-link">
-            <i class="bi bi-cart"></i>
+            <i class="bi bi-cart position-relative">
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                9
+              <span class="visually-hidden">unread messages</span>
+            </span>
+            </i>
           </router-link>
           </div>
           <div class="nav-link" @click="toggleMenu()">
             <i class="bi bi-list"></i>
         </div>
           
-          <ul class="nav-menu" @click="toggleMenu()" :class=" menuOpen ?'active':''">
+          <ul class="nav-menu container" @click="toggleMenu()" :class=" menuOpen ?'active':''">
             <div class="nav-link" >
               <i class="bi bi-x"></i>
             </div>
@@ -58,6 +63,7 @@ export default{
 <style lang="scss">
 *{
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif
 }
 ul{
   list-style: none;
@@ -87,14 +93,17 @@ header{
 .nav-link:hover{
   background-color: $secondary;
 }
+
 ////////////////////////////////////
 .nav-menu{
   position: fixed;
   z-index: 1002;
   right:-100%;
   top:0;
-  background-color: $light;
   transition: 0.3s all ease;
+
+  background-color: $light;
+  height: 100vh;
 }
 .nav-menu.active{
   right:0;
