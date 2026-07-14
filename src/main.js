@@ -1,11 +1,10 @@
-// import { createApp } from "vue";
-//
-// import router from "./router"; //引用router
-
-// createApp(home).use(router).mount("#app"); //從路由裡拉出home，再掛載上去
 import { createApp } from "vue";
 import App from "./App.vue";
-import "/src/scss/style.scss";
+
+import "bootstrap-icons/font/bootstrap-icons.css"; //bootsrap icons
+import "/src/scss/style.scss"; //客製化變數+bootstrap變數
+import "bootstrap/dist/js/bootstrap.bundle.min.js"; //bootstrap js
+
 import router from "./router"; // 引入路由實例
 
 const app = createApp(App);
