@@ -1,11 +1,6 @@
 <template>
-  <div
-    class="bg-secondary vh-100 d-flex flex-column align-items-center"
-    style="padding: 100px 0"
-  >
-    <HomeNews></HomeNews>
-    <Footer></Footer>
-  </div>
+  <HomeNews></HomeNews>
+  <Footer></Footer>
 </template>
 <script>
 import Carousel from "../components/Carousel.vue";

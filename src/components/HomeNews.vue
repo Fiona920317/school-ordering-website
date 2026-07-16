@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-5 ms-3 me-3" style="max-width: 767px">
+  <div class="mb-5 ms-3 me-3 w-100" style="max-width: 767px">
     <h2 class="newsTitle mb-4">最新消息</h2>
     <div class="newsListBackground">
       <ul class="newsList">
@@ -9,13 +9,13 @@
           >
         </li>
         <li>
+          <a class="newsList--textTitle" href="">9/30前首單滿NT$80折NT$10。</a>
+        </li>
+        <li>
           <a class="newsList--textTitle" href=""
-            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
-            ratione dignissimos consequuntur atque ab, itaque molestias dolores
-            assumenda vero sequi.</a
+            >中午尖峰時段請提前20分鐘下單，取餐更順暢。</a
           >
         </li>
-        <li><a class="newsList--textTitle" href="">3</a></li>
       </ul>
     </div>
   </div>

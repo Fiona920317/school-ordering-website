@@ -15,7 +15,7 @@
         </router-link>
       </li>
       <li>
-        <router-link class="navbarBottom-link" to="/">
+        <router-link class="navbarBottom-link" to="/browse">
           <i class="bi bi-fork-knife"></i
           ><span style="font-size: 12px">點餐</span>
         </router-link>
@@ -67,10 +67,13 @@ ul {
 }
 //
 .navbarBackground {
+  border-bottom: 1px solid $secondary;
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1000;
   display: flex;
   justify-content: center;
 }
@@ -81,6 +84,7 @@ ul {
 .navbar-brand {
   font-size: 60px;
   font-weight: bold;
+  margin-left: 10px;
 }
 .navbar-notification {
   font-size: 24px;
@@ -96,10 +100,14 @@ ul {
 }
 ////navbarBottom
 .navbarBottomBackground {
+  border-top: 1px solid $secondary;
+
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1000;
+
   display: flex;
   justify-content: center;
 }
@@ -122,6 +130,7 @@ ul {
   padding: 10px;
   border-radius: 10px;
   width: 100%;
+  font-weight: bold;
 
   display: flex;
   flex-direction: column;

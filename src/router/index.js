@@ -5,11 +5,30 @@ import Home from "../views/Home.vue";
 import Member from "../views/Member.vue";
 import Cart from "../views/Cart.vue";
 import Login from "../views/Login.vue";
+import Browse from "../views/Browse.vue";
+import RestaurantList from "../components/RestaurantList.vue";
+import ProductList from "../components/ProductList.vue";
 
 // 2. 定義路由規則
 const routes = [
   { path: "/", component: Home, name: "Home" },
   { path: "/login", component: Login, name: "Login" },
+  {
+    path: "/browse",
+    component: Browse,
+    children: [
+      {
+        path: "",
+        component: RestaurantList,
+        name: "Browse",
+      },
+      {
+        path: "products",
+        component: ProductList,
+        name: "Products",
+      },
+    ],
+  },
   { path: "/member", component: Member, name: "Member" },
   { path: "/cart", component: Cart, name: "Cart" },
 ];
