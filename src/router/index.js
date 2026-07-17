@@ -2,12 +2,12 @@ import { createRouter, createWebHistory } from "vue-router";
 
 // 1. 定義路由組件
 import Home from "../views/Home.vue";
-import Member from "../views/Member.vue";
-import Cart from "../views/Cart.vue";
 import Login from "../views/Login.vue";
 import Browse from "../views/Browse.vue";
 import RestaurantList from "../components/RestaurantList.vue";
 import ProductList from "../components/ProductList.vue";
+import Cart from "../views/Cart.vue";
+import Member from "../views/Member.vue";
 
 // 2. 定義路由規則
 const routes = [
@@ -29,8 +29,8 @@ const routes = [
       },
     ],
   },
-  { path: "/member", component: Member, name: "Member" },
   { path: "/cart", component: Cart, name: "Cart" },
+  { path: "/member", component: Member, name: "Member" },
 ];
 
 // 3. 建立路由實例

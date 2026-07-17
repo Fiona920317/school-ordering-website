@@ -4,7 +4,16 @@
       <router-link class="navbar-brand text-primary" to="/">
         <i class="bi bi-fork-knife"></i>校園點餐
       </router-link>
-      <a class="navbar-notification"><i class="bi bi-bell"></i></a>
+      <a class="navbar-notification"
+        ><i class="bi bi-bell position-relative">
+          <span
+            class="position-absolute translate-middle p-2 bg-danger border border-light rounded-circle"
+            style="top: 15%; left: 85%"
+          >
+            <span class="visually-hidden">New alerts</span>
+          </span>
+        </i>
+      </a>
     </nav>
   </div>
   <div class="navbarBottomBackground bg-light">
@@ -27,14 +36,17 @@
               class="position-absolute top-0 start-70 translate-middle badge rounded-pill bg-danger"
               style="font-size: 12px"
             >
-              99+
+              3
               <span class="visually-hidden">unread messages</span>
             </span></i
           ><span style="font-size: 12px">購物車</span>
         </router-link>
       </li>
       <li>
-        <router-link class="navbarBottom-link" to="/login">
+        <router-link
+          class="navbarBottom-link"
+          :to="loggedIn ? '/member' : '/login'"
+        >
           <i class="bi bi-person"></i
           ><span style="font-size: 12px">會員專區</span>
         </router-link>
@@ -46,6 +58,7 @@
 export default {
   data() {
     return {
+      loggedIn: true,
       menuOpen: false,
     };
   },
@@ -128,7 +141,6 @@ ul {
   font-size: 26px;
   color: $primary;
   padding: 10px;
-  border-radius: 10px;
   width: 100%;
   font-weight: bold;
 

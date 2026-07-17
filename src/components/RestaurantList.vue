@@ -24,11 +24,11 @@
           <span class="res-item__badge badge rounded-pill bg-danger">熱門</span>
           <router-link :to="{ name: 'Products' }" class="d-flex flex-column">
             <img
-              class="res-item__image img-fluid"
+              class="res-item__image img-fluid shadow-sm"
               src="https://images.unsplash.com/photo-1783542784656-834b97b3954a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
             />
-            <div class="res-item__textGroup">
+            <div class="res-item__textGroup shadow-sm">
               <h4 class="res-item__textTitle">活力早餐</h4>
               <p class="res-item__textContent m-0">早餐</p>
             </div>
@@ -122,7 +122,6 @@
 <style lang="scss">
 .inputGroup {
   width: 100%;
-  max-width: 767px;
 
   position: relative;
 }

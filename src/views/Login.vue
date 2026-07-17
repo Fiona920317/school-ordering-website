@@ -1,7 +1,7 @@
 <template>
   <div class="loginBackground mb-5">
     <h2 class="loginTitle">登入/註冊</h2>
-    <div class="loginContent">
+    <div class="loginContent shadow-sm">
       <p class="loginContent__text">
         使用LINE帳號登入，<br />即可同步你的訂單和取餐資訊。<br /><span
           class="fw-bold"
@@ -37,6 +37,7 @@ export default {
   background-color: $light;
   padding: 30px;
   border-radius: 20px;
+
   margin-bottom: 0;
 }
 .loginContent__text {

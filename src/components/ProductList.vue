@@ -1,12 +1,13 @@
 <template>
   <div class="w-100" style="max-width: 767px">
-    <router-link class="fs-5 fw-bold" :to="{ name: 'Browse' }"
-      ><i class="bi bi-arrow-left-circle me-2"></i>回前頁</router-link
-    >
-    <div class="selectedRes mt-3">
+    <router-link class="fs-5 fw-bold" :to="{ name: 'Browse' }">
+      <i class="bi bi-arrow-left-circle me-2"></i>回前頁
+    </router-link>
+    <div class="selectedRes mt-3 shadow-sm">
       <img
-        class="selectedRes__image"
-        src="../assets/images/Carousel-image.png"
+        class="img-fluid me-3"
+        style="max-width: 90px; border-radius: 10px"
+        src="https://images.unsplash.com/photo-1783962211635-ef0af72c7759?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt=""
       />
       <div class="selectedRes__textGroup">
@@ -23,11 +24,11 @@
             >
             <a href="" class="d-flex flex-column">
               <img
-                class="product__image img-fluid"
+                class="product__image img-fluid shadow-sm"
                 src="https://images.unsplash.com/photo-1783542784656-834b97b3954a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt=""
               />
-              <div class="product__textGroup">
+              <div class="product__textGroup shadow-sm">
                 <h4 class="product__textTitle">起司蛋餅</h4>
                 <p class="product__textContent">NT$40</p>
                 <button
@@ -48,7 +49,11 @@
       :class="{ 'd-none': isOpen == false }"
     >
       <h4 class="text-primary fw-bold">加入購物車</h4>
-      <img src="../assets/images/Carousel-image.png" alt="" />
+      <img
+        style="max-height: 90px; border-radius: 10px"
+        src="https://images.unsplash.com/photo-1783962211635-ef0af72c7759?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt=""
+      />
       <h5 class="m-0">起司蛋餅</h5>
       <p class="text-muted mb-1">單價$NT40</p>
       <div class="AddToCart__numBtnGroup">
