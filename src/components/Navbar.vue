@@ -1,7 +1,7 @@
 <template>
   <div class="navbarBackground bg-light">
     <nav class="navbar">
-      <router-link class="navbar-brand text-primary" to="/">
+      <router-link class="navbar-brand text-primary fs-3" to="/">
         <i class="bi bi-fork-knife"></i>校園點餐
       </router-link>
       <a class="navbar-notification"
@@ -106,11 +106,14 @@ ul {
   border-radius: 10px;
 
   cursor: pointer;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .navbar-notification:hover {
   background-color: $secondary;
 }
+
 ////navbarBottom
 .navbarBottomBackground {
   border-top: 1px solid $secondary;

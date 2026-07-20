@@ -93,7 +93,7 @@
           </div>
           <div class="memberInfo-item d-flex flex-column col">
             <label for="">取餐地點</label>
-            <div class="d-flex align-items-center">
+            <div class="d-flex flex-column flex-md-row align-items-center">
               <p class="m-0 me-3">誠心樓二樓</p>
               <select name="" id="" style="cursor: pointer; flex: 1">
                 <option value="A">A區(醫科院)</option>

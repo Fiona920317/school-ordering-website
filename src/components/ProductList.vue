@@ -45,7 +45,7 @@
     </div>
 
     <div
-      class="AddToCart translate-middle"
+      class="AddToCartModal translate-middle"
       :class="{ 'd-none': isOpen == false }"
     >
       <h4 class="text-primary fw-bold">加入購物車</h4>
@@ -56,7 +56,7 @@
       />
       <h5 class="m-0">起司蛋餅</h5>
       <p class="text-muted mb-1">單價$NT40</p>
-      <div class="AddToCart__numBtnGroup">
+      <div class="AddToCartModal__numBtnGroup">
         <a @click.prevent="reduceNum" href=""
           ><i class="bi bi-dash-circle fs-2"></i
         ></a>
@@ -65,21 +65,23 @@
           ><i class="bi bi-plus-circle fs-2"></i
         ></a>
       </div>
-      <div class="AddToCart__submitBtnGroup">
+      <div class="AddToCartModal__submitBtnGroup">
         <button
           @click="toggleForm"
-          class="AddToCart__submitBtnGroup__cancelBtn btn btn-danger"
+          class="AddToCartModal__submitBtnGroup__cancelBtn btn btn-danger"
         >
           取消
         </button>
-        <button class="AddToCart__submitBtnGroup__confirmBtn btn btn-primary">
+        <button
+          class="AddToCartModal__submitBtnGroup__confirmBtn btn btn-primary"
+        >
           確認
         </button>
       </div>
     </div>
     <div
       @click.stop.prevent="toggleForm"
-      class="overlay"
+      class="AddToCartModal-overlay"
       :class="{ 'd-none': isOpen == false }"
     ></div>
   </div>
@@ -162,8 +164,8 @@ export default {
   font-size: 20px;
   font-weight: bold;
 }
-//AddToCart
-.AddToCart {
+//AddToCartModal
+.AddToCartModal {
   background-color: $light;
   border-radius: 20px;
   padding: 15px;
@@ -179,33 +181,36 @@ export default {
   left: 50%;
   z-index: 1002;
 }
-.AddToCart__numBtnGroup {
+.AddToCartModal__numBtnGroup {
   font-size: 24px;
 
   display: flex;
   align-items: center;
   gap: 30px;
 }
-.AddToCart__submitBtnGroup {
+.AddToCartModal__numBtnGroup a:hover {
+  color: $secondary;
+}
+.AddToCartModal__submitBtnGroup {
   margin-top: 10px;
 
   display: flex;
   gap: 10px;
 }
-.AddToCart__submitBtnGroup__cancelBtn,
-.AddToCart__submitBtnGroup__confirmBtn {
+.AddToCartModal__submitBtnGroup__cancelBtn,
+.AddToCartModal__submitBtnGroup__confirmBtn {
   padding: 10px 30px;
   font-weight: bold;
 }
-.overlay {
+.AddToCartModal-overlay {
   background-color: rgba($color: #000000, $alpha: 0.5);
   backdrop-filter: blur(10px);
 
-  position: absolute;
+  position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 1001;
 }
 </style>

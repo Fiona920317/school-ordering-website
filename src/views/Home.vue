@@ -1,4 +1,5 @@
 <template>
+  <Carousel></Carousel>
   <HomeNews></HomeNews>
   <Footer></Footer>
 </template>
