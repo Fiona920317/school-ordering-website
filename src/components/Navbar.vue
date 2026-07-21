@@ -154,4 +154,8 @@ ul {
   background-color: $secondary;
   color: $primary;
 }
+.navbarBottom .router-link-active {
+  background-color: $secondary;
+  color: $primary;
+}
 </style>

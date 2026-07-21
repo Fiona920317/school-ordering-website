@@ -76,26 +76,34 @@
       </div>
     </ul>
     <div class="w-100">
-      <h4 class="text-primary fw-bold">取餐資訊</h4>
+      <h4 class="text-primary fw-bold">
+        取餐資訊
+        <button @click="getMemberInfo">戳我獲取取餐資訊</button>
+      </h4>
       <form class="memberInfo shadow-sm">
         <div class="row row-cols-1 row-cols-md-2 g-3">
           <div class="memberInfo-item d-flex flex-column col">
             <label for="">姓名</label>
-            <input type="text" />
+            <input type="text" :value="memberInfo.name" />
           </div>
           <div class="memberInfo-item d-flex flex-column col">
             <label for="">學號</label>
-            <input type="text" />
+            <input type="text" :value="memberInfo.studentNum" />
           </div>
           <div class="memberInfo-item d-flex flex-column col">
             <label for="">電話</label>
-            <input type="text" />
+            <input type="text" :value="memberInfo.phoneNum" />
           </div>
           <div class="memberInfo-item d-flex flex-column col">
             <label for="">取餐地點</label>
-            <div class="d-flex flex-column flex-md-row align-items-center">
+            <div class="d-flex flex-column flex-md-row align-items-md-center">
               <p class="m-0 me-3">誠心樓二樓</p>
-              <select name="" id="" style="cursor: pointer; flex: 1">
+              <select
+                name="area"
+                id="area"
+                :value="memberInfo.area"
+                style="cursor: pointer; flex: 1"
+              >
                 <option value="A">A區(醫科院)</option>
                 <option value="B">B區(口腔醫學院、健管院)</option>
                 <option value="C">C區(醫學院)</option>
@@ -112,7 +120,16 @@
   </div>
 </template>
 <script>
-export default {};
+import { mapState, mapActions } from "pinia";
+import { useMainStore } from "../stores/mainStore";
+export default {
+  computed: {
+    ...mapState(useMainStore, ["memberInfo"]),
+  },
+  methods: {
+    ...mapActions(useMainStore, ["getMemberInfo"]),
+  },
+};
 </script>
 <style lang="scss">
 .CheckoutList {

@@ -1,7 +1,7 @@
 <template>
-  <div class="mb-5 ms-3 me-3 w-100 shadow-sm" style="max-width: 767px">
+  <div class="mb-5 ms-3 me-3 w-100" style="max-width: 767px">
     <h2 class="newsTitle mb-4">最新消息</h2>
-    <div class="newsListBackground">
+    <div class="newsListBackground shadow-sm">
       <ul class="newsList">
         <li>
           <a class="newsList--textTitle" href=""
