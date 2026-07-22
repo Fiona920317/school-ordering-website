@@ -32,10 +32,10 @@ const carouselConfig = {
 </script>
 
 <template>
-  <h2 class="text-primary mb-3">大家都在點</h2>
+  <h2 class="text-primary mb-3 fw-bold">大家都在點</h2>
   <Carousel class="mb-3" v-bind="carouselConfig">
     <Slide class="position-relative" v-for="image in images" :key="image.id">
-      <img class="img-fluid" :src="image.url" alt="Home carousel" />z
+      <img class="img-fluid" :src="image.url" alt="Home carousel" />
       <div class="carousel-caption position-absolute">
         <h3>{{ image.title }}</h3>
         <p>{{ image.content }}</p>

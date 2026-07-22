@@ -1,5 +1,12 @@
 <template>
-  <button @click="test">戳我測試pinia</button>
+  <button @click="isModalOpen = !isModalOpen">戳我測試BaseModal</button>
+  <BaseModal
+    :isOpen="isModalOpen"
+    :numBtnGroup="true"
+    @close="isModalOpen = false"
+  >
+    <template #body></template>
+  </BaseModal>
   <Carousel></Carousel>
   <HomeNews></HomeNews>
   <Footer></Footer>
@@ -9,15 +16,14 @@ import Carousel from "../components/Carousel.vue";
 import Footer from "../components/Footer.vue";
 import HomeNews from "../components/HomeNews.vue";
 
-import { mapState, mapActions } from "pinia";
-import { useMainStore } from "../stores/mainStore.js";
+import BaseModal from "../components/bases/BaseModal.vue";
+
 export default {
-  components: { Carousel, Footer, HomeNews },
-  computed: {
-    ...mapState(useMainStore, ["testNum"]),
-  },
-  methods: {
-    ...mapActions(useMainStore, ["test"]),
+  components: { Carousel, Footer, HomeNews, BaseModal },
+  data() {
+    return {
+      isModalOpen: false,
+    };
   },
 };
 </script>

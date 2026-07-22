@@ -1,18 +1,20 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 // 1. 定義路由組件
+//Home
 import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
+//Browse
 import Browse from "../views/Browse.vue";
-import RestaurantList from "../components/RestaurantList.vue";
-import ProductList from "../components/ProductList.vue";
+import RestaurantList from "../components/browse/RestaurantList.vue";
+import ProductList from "../components/browse/ProductList.vue";
+//Cart
 import Cart from "../views/Cart.vue";
+//Member
 import Member from "../views/Member.vue";
 
 // 2. 定義路由規則
 const routes = [
   { path: "/", component: Home, name: "Home" },
-  { path: "/login", component: Login, name: "Login" },
   {
     path: "/browse",
     component: Browse,

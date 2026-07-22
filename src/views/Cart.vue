@@ -76,23 +76,20 @@
       </div>
     </ul>
     <div class="w-100">
-      <h4 class="text-primary fw-bold">
-        取餐資訊
-        <button @click="getMemberInfo">戳我獲取取餐資訊</button>
-      </h4>
+      <h4 class="text-primary fw-bold">取餐資訊</h4>
       <form class="memberInfo shadow-sm">
         <div class="row row-cols-1 row-cols-md-2 g-3">
           <div class="memberInfo-item d-flex flex-column col">
             <label for="">姓名</label>
-            <input type="text" :value="memberInfo.name" />
+            <input type="text" :value="userInfo.name" />
           </div>
           <div class="memberInfo-item d-flex flex-column col">
             <label for="">學號</label>
-            <input type="text" :value="memberInfo.studentNum" />
+            <input type="text" :value="userInfo.studentNum" />
           </div>
           <div class="memberInfo-item d-flex flex-column col">
             <label for="">電話</label>
-            <input type="text" :value="memberInfo.phoneNum" />
+            <input type="text" :value="userInfo.phoneNum" />
           </div>
           <div class="memberInfo-item d-flex flex-column col">
             <label for="">取餐地點</label>
@@ -101,7 +98,7 @@
               <select
                 name="area"
                 id="area"
-                :value="memberInfo.area"
+                :value="userInfo.area"
                 style="cursor: pointer; flex: 1"
               >
                 <option value="A">A區(醫科院)</option>
@@ -121,14 +118,13 @@
 </template>
 <script>
 import { mapState, mapActions } from "pinia";
-import { useMainStore } from "../stores/mainStore";
+import { useAuthStore } from "../stores/authStore";
+
 export default {
   computed: {
-    ...mapState(useMainStore, ["memberInfo"]),
+    ...mapState(useAuthStore, ["userInfo"]),
   },
-  methods: {
-    ...mapActions(useMainStore, ["getMemberInfo"]),
-  },
+  methods: {},
 };
 </script>
 <style lang="scss">

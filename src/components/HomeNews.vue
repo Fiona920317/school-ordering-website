@@ -1,6 +1,6 @@
 <template>
   <div class="mb-5 ms-3 me-3 w-100" style="max-width: 767px">
-    <h2 class="newsTitle mb-4">最新消息</h2>
+    <h2 class="newsTitle mb-4 text-center">最新消息</h2>
     <div class="newsListBackground shadow-sm">
       <ul class="newsList">
         <li>

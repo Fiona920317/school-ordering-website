@@ -22,12 +22,7 @@
   </div>
   <Footer></Footer>
 </template>
-<script>
-import Footer from "../components/Footer.vue";
-export default {
-  components: { Footer },
-};
-</script>
+<script></script>
 <style lang="scss">
 .loginBackground {
   text-align: center;
