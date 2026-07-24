@@ -1,5 +1,5 @@
 <template>
-  <div class="productItem">
+  <div class="productItem d-flex flex-column h-100">
     <span
       class="productItem__tagBadge badge rounded-pill"
       v-if="product.state"
@@ -16,23 +16,24 @@
     >
       素食
     </span>
-    <a href="" @click.prevent="isOpen = true" class="d-flex flex-column">
+    <a href="" @click.prevent="isOpen = true" class="d-flex flex-column h-100">
       <img
         class="product__image img-fluid shadow-sm"
         src="https://images.unsplash.com/photo-1783542784656-834b97b3954a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt=""
       />
-      <div class="product__textGroup shadow-sm">
+      <div class="product__textGroup shadow-sm flex-grow-1">
         <h4 class="product__textTitle">{{ product.productName }}</h4>
-        <div class="d-flex" v-if="product.discount !== 1">
+        <div
+          class="d-flex flex-column flex-md-row gap-1"
+          v-if="product.discount !== 1"
+        >
           <p
-            class="product__textContent text-black-50 text-decoration-line-through"
+            class="product__textContent text-black-50 text-decoration-line-through m-0"
           >
             原價NT${{ product.ori_price }}
           </p>
-          <p class="product__textContent ms-3">
-            特價NT${{ product.final_price }}
-          </p>
+          <p class="product__textContent">特價NT${{ product.final_price }}</p>
         </div>
         <p class="product__textContent" v-else>NT${{ product.final_price }}</p>
         <button
@@ -59,7 +60,7 @@
         src="https://images.unsplash.com/photo-1783962211635-ef0af72c7759?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt=""
       />
-      <h5 class="m-0">{{ product.name }}</h5>
+      <h5 class="m-0">{{ product.productName }}</h5>
       <p class="text-muted m-0">單價NT${{ product.final_price }}</p>
     </template>
   </BaseModal>
