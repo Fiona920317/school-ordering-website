@@ -4,20 +4,32 @@
       <div class="modal-header">
         <slot name="header">本周新增</slot>
       </div>
-      <div class="modal-body overflow-auto" style="max-height: 200px">
+      <div
+        class="modal-body d-flex flex-column align-items-center gap-1 overflow-auto w-100"
+        style="max-height: 200px"
+      >
         <slot name="body">我是內文</slot>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer d-flex flex-column gap-1">
         <slot name="footer">
+          <div class="numBtnGroup" v-if="numBtnGroup">
+            <a @click.prevent="reduceNum" href="">
+              <i class="bi bi-dash-circle fs-2"></i>
+            </a>
+            {{ productNum }}
+            <a @click.prevent="productNum++" href="">
+              <i class="bi bi-plus-circle fs-2"></i>
+            </a>
+          </div>
           <div class="submitBtnGroup">
             <button
-              @click="$emit('close')"
+              @click="closeModal"
               class="submitBtnGroup__cancelBtn btn btn-danger"
             >
               取消
             </button>
             <button
-              @click="$emit('close')"
+              @click="closeModal"
               class="submitBtnGroup__confirmBtn btn btn-primary"
             >
               確認
@@ -38,7 +50,7 @@ export default {
       default: false,
     },
   },
-  emits: ["close"],
+  emits: ["close", "productNum"],
   data() {
     return {
       productNum: 1,
@@ -51,6 +63,11 @@ export default {
       } else {
         this.productNum--;
       }
+    },
+    closeModal() {
+      this.$emit("productNum", this.productNum);
+      this.productNum = 1;
+      this.$emit("close");
     },
   },
 };
@@ -68,13 +85,27 @@ export default {
   align-items: center;
   gap: 10px;
 
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   z-index: 1002;
 }
+//modal-header
+.modal-header {
+  color: $primary;
+}
 //modal-body
 
+.numBtnGroup {
+  font-size: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.numBtnGroup a:hover {
+  color: $secondary;
+}
 //modal-footer
 .submitBtnGroup {
   margin-top: 10px;
@@ -87,6 +118,7 @@ export default {
   padding: 10px 30px;
   font-weight: bold;
 }
+//modal-overlay
 .modal-overlay {
   background-color: rgba($color: #000000, $alpha: 0.5);
   backdrop-filter: blur(10px);

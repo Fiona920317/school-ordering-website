@@ -33,10 +33,11 @@
         <router-link class="navbarBottom-link" to="/cart">
           <i class="bi bi-cart position-relative">
             <span
+              v-if="cart.length !== 0"
               class="position-absolute top-0 start-70 translate-middle badge rounded-pill bg-danger"
               style="font-size: 12px"
             >
-              3
+              {{ cart.length }}
               <span class="visually-hidden">unread messages</span>
             </span></i
           ><span style="font-size: 12px">購物車</span>
@@ -55,12 +56,18 @@
   </div>
 </template>
 <script>
+import { mapState, mapActions } from "pinia";
+import { useCartStore } from "../stores/cartStore";
+
 export default {
   data() {
     return {
       loggedIn: true,
       menuOpen: false,
     };
+  },
+  computed: {
+    ...mapState(useCartStore, ["cart"]),
   },
   methods: {
     toggleMenu() {

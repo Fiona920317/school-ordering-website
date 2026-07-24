@@ -29,6 +29,7 @@
     <div class="row row-cols-2 row-cols-md-3 g-3">
       <div class="col" v-for="resItem in filteredRestaurants" :key="resItem.id">
         <ResItem
+          @click="selectRestaurant(resItem)"
           :name="resItem.name"
           :tag="resItem.tag"
           :state="resItem.state"
@@ -42,21 +43,32 @@
         v-if="filteredRestaurants.length == 0"
         class="m-0 fs-2 fw-bold text-primary"
       >
-        查無搜尋結果QAQ
+        這邊什麼都沒有QAQ
       </p>
     </div>
   </div>
 </template>
 <script>
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useBrowseStore } from "../../stores/browseStore.js";
 import ResItem from "./ResItem.vue";
 
 export default {
   name: "RestaurantList",
   components: { ResItem },
+
+  data() {
+    return {
+      searchText: "", //持續同步搜尋框文字
+      activeSearchText: "", //等到按下搜尋按鈕時，再和searchText同步
+      selectedTag: "全部",
+    };
+  },
+  methods: {
+    ...mapActions(useBrowseStore, ["selectRestaurant"]),
+  },
   computed: {
-    ...mapState(useBrowseStore, ["restaurants"]),
+    ...mapState(useBrowseStore, ["restaurants", "temp"]),
     filteredRestaurants() {
       let filteredRestaurants = [];
       //tag篩選
@@ -79,13 +91,6 @@ export default {
       }
       return filteredRestaurants;
     },
-  },
-  data() {
-    return {
-      searchText: "", //持續同步搜尋框文字
-      activeSearchText: "", //等到按下搜尋按鈕時，再和searchText同步
-      selectedTag: "全部",
-    };
   },
 };
 </script>

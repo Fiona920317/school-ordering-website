@@ -1,100 +1,92 @@
 <template>
-  <div
-    class="d-flex align-items-center w-100 p-3 shadow-sm"
-    style="background-color: #f9ecd4; border-radius: 20px 20px 0 0"
-  >
-    <img
-      class="img-fluid"
-      style="height: 80px; width: 80px; border-radius: 100%"
-      src="https://images.unsplash.com/photo-1783949247747-210d1403da8a?q=80&w=689&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      alt=""
-    />
-    <div class="ms-3">
-      <h5>{{ name }}</h5>
-      <p class="m-0">學號 {{ studentNum }}</p>
+  <div class="w-100 d-flex flex-column gap-3 mb-3">
+    <router-link class="fs-5 fw-bold" to="/member">
+      <i class="bi bi-arrow-left-circle me-2"></i>回前頁
+    </router-link>
+    <div>
+      <h4 class="text-primary fw-bold text-center">會員基本資料</h4>
+      <form class="userInfo shadow-sm">
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+          <div class="userInfo-item d-flex flex-column col">
+            <label for="">姓名</label>
+            <input type="text" v-model="tempUserInfo.name" />
+          </div>
+          <div class="userInfo-item d-flex flex-column col">
+            <label for="">學號</label>
+            <input type="text" v-model="tempUserInfo.studentNum" />
+          </div>
+          <div class="userInfo-item d-flex flex-column col">
+            <label for="">電話</label>
+            <input type="text" v-model="tempUserInfo.phoneNum" />
+          </div>
+          <div class="userInfo-item d-flex flex-column col">
+            <label for="">取餐地點</label>
+            <div class="d-flex flex-column flex-md-row align-items-md-center">
+              <p class="m-0 me-3">誠心樓二樓</p>
+              <select
+                name="area"
+                id="area"
+                v-model="tempUserInfo.area"
+                style="cursor: pointer; flex: 1"
+              >
+                <option value="A">A區(醫科院)</option>
+                <option value="B">B區(口腔醫學院、健管院)</option>
+                <option value="C">C區(醫學院)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="d-flex justify-content-center">
+      <a class="submitBtn btn btn-primary" href="" @click.prevent=""> 儲存 </a>
     </div>
   </div>
-  <ul
-    class="memberLinksGroup w-100 shadow-sm"
-    style="border-radius: 0 0 20px 20px"
-  >
-    <li>
-      <a class="memberLinksGroup__link" href="">
-        <i class="memberLinksGroup__link__titleIcon bi bi-person-circle"></i>
-        <div class="ms-3">
-          <h5>基本資料管理</h5>
-          <p class="m-0">姓名、電話、預設取餐地點</p>
-        </div>
-        <i
-          class="memberLinksGroup__link__arrowIcon translate-middle bi bi-chevron-right"
-        >
-        </i>
-      </a>
-    </li>
-    <li>
-      <a class="memberLinksGroup__link" href="">
-        <i class="memberLinksGroup__link__titleIcon bi bi-list"></i>
-        <div class="ms-3">
-          <h5>我的訂單</h5>
-          <p class="m-0">查看訂單狀態與歷史紀錄</p>
-        </div>
-        <i
-          class="memberLinksGroup__link__arrowIcon translate-middle bi bi-chevron-right"
-        >
-        </i>
-      </a>
-    </li>
-    <li>
-      <a
-        class="memberLinksGroup__link"
-        style="border-radius: 0 0 20px 20px"
-        href=""
-      >
-        <i class="memberLinksGroup__link__titleIcon bi bi-suit-heart"></i>
-        <div class="ms-3">
-          <h5>追蹤我們</h5>
-          <p class="m-0">校園點餐官方FB、Line、IG</p>
-        </div>
-        <i
-          class="memberLinksGroup__link__arrowIcon translate-middle bi bi-chevron-right"
-        >
-        </i>
-      </a>
-    </li>
-  </ul>
 </template>
 <script>
+import { mapState, mapActions } from "pinia";
+import { useAuthStore } from "../../stores/authStore";
+
 export default {
-  props: {
-    name: String,
-    studentNum: String,
-    phoneNum: String,
-    area: String,
+  data() {
+    return {
+      tempUserInfo: {
+        //先建一個空物件，待會mounted的時候同步
+      },
+    };
+  },
+  computed: {
+    ...mapState(useAuthStore, ["userInfo"]),
+  },
+  methods: {
+    ...mapActions(useAuthStore, ["updateUserInfo"]),
+  },
+  mounted() {
+    this.tempUserInfo = { ...this.userInfo };
+    //不能直接在data裡面複製，會失敗
+    //因為Options API的執行順序是data=>computed=>methods=>mounted，在data複製會得不到computed時才拿到的值
   },
 };
 </script>
 <style lang="scss">
-.memberLinksGroup__link {
-  display: flex;
-  align-items: center;
-
-  position: relative;
-  padding: 20px;
-
-  color: $primary;
+.userInfo {
   background-color: $light;
-  border-bottom: 1px solid $secondary;
+  border-radius: 20px;
+  padding: 20px;
 }
-.memberLinksGroup__link:hover {
-  color: $light;
-  background-color: $primary;
+.userInfo-item label {
+  margin-bottom: 5px;
 }
-.memberLinksGroup__link__titleIcon {
-  font-size: 36px;
+.userInfo-item input,
+.userInfo-item select {
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
 }
-.memberLinksGroup__link__arrowIcon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
+.cancenlBtn,
+.submitBtn {
+  font-weight: bold;
+  width: 30%;
+  padding: 10px 0;
 }
 </style>

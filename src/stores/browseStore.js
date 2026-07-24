@@ -1,6 +1,15 @@
 import { defineStore } from "pinia";
 
 export const useBrowseStore = defineStore("browse", {
+  actions: {
+    selectRestaurant(resItem) {
+      this.temp = {
+        resName: resItem.name,
+        resId: resItem.id,
+        products: resItem.products,
+      };
+    },
+  },
   state: () => ({
     temp: { resName: "", resId: "", products: [] },
     restaurants: [

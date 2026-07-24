@@ -3,169 +3,132 @@
     class="w-100 d-flex flex-column align-items-center gap-3"
     style="max-width: 767px"
   >
-    <ul class="CheckoutList shadow-sm">
-      <li>
-        <div class="d-flex align-items-center mb-3">
-          <i class="bi bi-dot fs-3 text-primary"></i>
-          <h4 class="fw-bold m-0">活力早餐</h4>
-          <a class="CheckoutList__deleteBtn btn btn-danger ms-auto" href="">
-            <i class="bi bi-trash-fill"></i>
-          </a>
-        </div>
-
-        <div class="d-flex">
-          <div>
-            <img
-              class="img-fluid"
-              style="max-height: 90px; border-radius: 10px"
-              src="https://images.unsplash.com/photo-1783962211635-ef0af72c7759?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
-            <h5 class="mt-2 mb-2">起司蛋餅</h5>
-          </div>
-          <div class="ms-auto d-flex flex-column justify-content-center">
-            <div class="CheckoutList__numBtnGroup ms-auto">
-              <a @click.prevent="reduceNum" href=""
-                ><i class="bi bi-dash-circle"></i
-              ></a>
-              3
-              <a @click.prevent="productNum++" href=""
-                ><i class="bi bi-plus-circle"></i
-              ></a>
-            </div>
-            <p class="m-0 ms-auto pt-3">小計:NT$120</p>
-          </div>
-        </div>
-      </li>
-      <li>
-        <div class="d-flex align-items-center mb-3">
-          <i class="bi bi-dot fs-3 text-primary"></i>
-          <h4 class="fw-bold m-0">活力早餐</h4>
-          <a class="CheckoutList__deleteBtn btn btn-danger ms-auto" href="">
-            <i class="bi bi-trash-fill"></i>
-          </a>
-        </div>
-
-        <div class="d-flex">
-          <div>
-            <img
-              class="img-fluid"
-              style="max-height: 90px; border-radius: 10px"
-              src="https://images.unsplash.com/photo-1783961797133-dd0fc5a722ec?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
-            <h5 class="mt-2 mb-2">起司蛋餅</h5>
-          </div>
-          <div class="ms-auto d-flex flex-column justify-content-center">
-            <div class="CheckoutList__numBtnGroup ms-auto">
-              <a @click.prevent="reduceNum" href=""
-                ><i class="bi bi-dash-circle"></i
-              ></a>
-              3
-              <a @click.prevent="productNum++" href=""
-                ><i class="bi bi-plus-circle"></i
-              ></a>
-            </div>
-            <p class="m-0 ms-auto pt-3">小計:NT$120</p>
-          </div>
-        </div>
-      </li>
-      <div class="CheckoutList__total">
-        <h5>總計</h5>
-        <h3 class="fw-bold text-primary">NT$120</h3>
-      </div>
-    </ul>
-    <div class="w-100">
-      <h4 class="text-primary fw-bold">取餐資訊</h4>
-      <form class="memberInfo shadow-sm">
-        <div class="row row-cols-1 row-cols-md-2 g-3">
-          <div class="memberInfo-item d-flex flex-column col">
-            <label for="">姓名</label>
-            <input type="text" :value="userInfo.name" />
-          </div>
-          <div class="memberInfo-item d-flex flex-column col">
-            <label for="">學號</label>
-            <input type="text" :value="userInfo.studentNum" />
-          </div>
-          <div class="memberInfo-item d-flex flex-column col">
-            <label for="">電話</label>
-            <input type="text" :value="userInfo.phoneNum" />
-          </div>
-          <div class="memberInfo-item d-flex flex-column col">
-            <label for="">取餐地點</label>
-            <div class="d-flex flex-column flex-md-row align-items-md-center">
-              <p class="m-0 me-3">誠心樓二樓</p>
-              <select
-                name="area"
-                id="area"
-                :value="userInfo.area"
-                style="cursor: pointer; flex: 1"
-              >
-                <option value="A">A區(醫科院)</option>
-                <option value="B">B區(口腔醫學院、健管院)</option>
-                <option value="C">C區(醫學院)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </form>
+    <div v-if="hasLoggedIn">
+      <CheckoutList></CheckoutList>
+      <UserInfoForm @tempUserInfo="equalizeUserInfo"></UserInfoForm>
       <div class="mt-3 w-100 d-flex justify-content-center gap-3">
-        <a class="cancenlBtn btn btn-light text-primary" href="">繼續選購</a>
-        <a class="submitBtn btn btn-primary" href="">確定送出</a>
+        <router-link
+          to="/browse"
+          class="cancenlBtn btn btn-light text-primary"
+          href=""
+        >
+          繼續選購
+        </router-link>
+        <a
+          class="submitBtn btn btn-primary"
+          href=""
+          @click.prevent="isModalOpen = true"
+        >
+          確定送出
+        </a>
       </div>
+      <BaseModal :isOpen="isModalOpen">
+        <template #header>
+          <h4 class="fw-bold">訂單確認</h4>
+        </template>
+        <template #body>
+          <ul
+            class="m-0"
+            style="width: 70%; list-style: disc; padding-left: 10px"
+          >
+            <li v-for="product in cartWithSubtotal" class="mb-1">
+              <p class="m-0">{{ product.resName }}</p>
+              <div class="d-flex justify-content-between">
+                <p class="m-0">
+                  {{ product.productName }}x{{ product.productNum }}
+                </p>
+                <p class="m-0">NT${{ product.subtotal }}</p>
+              </div>
+            </li>
+          </ul>
+        </template>
+        <template #footer>
+          <div class="d-flex">
+            <input
+              type="checkbox"
+              id="changeUserInfo"
+              value="yes"
+              ref="changeUserInfo"
+            />
+            <label for="changeUserInfo">儲存變更的取餐資訊</label>
+          </div>
+          <div class="submitBtnGroup">
+            <button
+              @click="isModalOpen = false"
+              class="submitBtnGroup__cancelBtn btn btn-danger"
+            >
+              取消
+            </button>
+            <button
+              @click="sendOrder"
+              class="submitBtnGroup__confirmBtn btn btn-primary"
+            >
+              確認
+            </button>
+          </div>
+        </template>
+      </BaseModal>
     </div>
+    <Login v-else></Login>
   </div>
 </template>
 <script>
+import CheckoutList from "../components/cart/CheckoutList.vue";
+import UserInfoForm from "../components/cart/UserInfoForm.vue";
+import BaseModal from "../components/bases/BaseModal.vue";
+import Login from "../components/member/Login.vue";
 import { mapState, mapActions } from "pinia";
-import { useAuthStore } from "../stores/authStore";
+import { useCartStore } from "../stores/cartStore";
+import { useAuthStore } from "../stores/authStore.js";
+import { useOrderStore } from "../stores/orderStore";
 
 export default {
-  computed: {
-    ...mapState(useAuthStore, ["userInfo"]),
+  components: { CheckoutList, UserInfoForm, BaseModal, Login },
+  data() {
+    return {
+      tempUserInfo: {},
+      isModalOpen: false,
+    };
   },
-  methods: {},
+  computed: {
+    ...mapState(useAuthStore, ["hasLoggedIn", "userInfo"]),
+    ...mapState(useCartStore, ["cart", "cartWithSubtotal", "total"]),
+    ...mapState(useOrderStore, ["orders"]),
+  },
+  methods: {
+    ...mapActions(useAuthStore, ["updateUserInfo"]),
+    ...mapActions(useOrderStore, ["addOrder"]),
+    ...mapActions(useCartStore, ["clearCart"]),
+    equalizeUserInfo(tempUserInfo) {
+      this.tempUserInfo = tempUserInfo;
+    },
+    sendOrder() {
+      //確認是否要儲存UserInfo
+      if (this.$refs.changeUserInfo.value == "yes") {
+        this.updateUserInfo(this.tempUserInfo);
+      }
+      // 接下來把cartWithSubtotal、total、userInfo合併成一個新物件，外加訂單id
+      let newOrder = {
+        orderId: Math.random().toString(36).substring(2, 10),
+        orderTime: new Date().toLocaleString(),
+        userInfo: { ...this.userInfo },
+      };
+      newOrder.products = { ...this.cartWithSubtotal };
+      newOrder.total = this.total;
+      console.log(newOrder);
+      //加到歷史訂單
+      this.addOrder(newOrder);
+      console.log(this.orders);
+      //清空購物車
+      this.clearCart();
+      console.log(this.cart);
+      //關閉Modal
+      this.isModalOpen = false;
+    },
+  },
 };
 </script>
 <style lang="scss">
-.CheckoutList {
-  background-color: $light;
-  border-radius: 20px;
-  padding: 20px;
-  width: 100%;
-}
-.CheckoutList li {
-  border-bottom: 1.5px solid $secondary;
-  padding-top: 10px;
-}
-.CheckoutList__total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding-top: 20px;
-}
-.CheckoutList__numBtnGroup {
-  font-size: 28px;
-
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-.memberInfo {
-  background-color: $light;
-  border-radius: 20px;
-  padding: 20px;
-}
-.memberInfo-item label {
-  margin-bottom: 5px;
-}
-.memberInfo-item input,
-.memberInfo-item select {
-  border: none;
-  padding: 10px;
-  border-radius: 10px;
-}
 .cancenlBtn,
 .submitBtn {
   font-weight: bold;

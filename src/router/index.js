@@ -11,6 +11,9 @@ import ProductList from "../components/browse/ProductList.vue";
 import Cart from "../views/Cart.vue";
 //Member
 import Member from "../views/Member.vue";
+import MemberIndex from "../components/member/MemberIndex.vue";
+import MemberInfo from "../components/member/MemberInfo.vue";
+import OrderHistory from "../components/member/OrderHistory.vue";
 
 // 2. 定義路由規則
 const routes = [
@@ -32,7 +35,28 @@ const routes = [
     ],
   },
   { path: "/cart", component: Cart, name: "Cart" },
-  { path: "/member", component: Member, name: "Member" },
+  {
+    path: "/member",
+    component: Member,
+
+    children: [
+      {
+        path: "",
+        component: MemberIndex,
+        name: "MemberIndex",
+      },
+      {
+        path: "member-info",
+        component: MemberInfo,
+        name: "MemberInfo",
+      },
+      {
+        path: "order-history",
+        component: OrderHistory,
+        name: "OrderHistory",
+      },
+    ],
+  },
 ];
 
 // 3. 建立路由實例

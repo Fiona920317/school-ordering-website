@@ -35,10 +35,7 @@ export default {
     name: String,
     tag: String,
     vegan: { type: Boolean, default: false },
-    state: {
-      type: String,
-      default: "",
-    },
+    state: String,
     imgUrl: String,
   },
 };

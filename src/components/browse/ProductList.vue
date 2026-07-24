@@ -11,55 +11,41 @@
         alt=""
       />
       <div class="selectedRes__textGroup">
-        <h4 class="selectedRes__resName fw-bold">活力早餐</h4>
-        <p class="selectedRes__resNumber fw-bold m-0">店家編號A101</p>
+        <h4 class="selectedRes__resName fw-bold">{{ temp.resName }}</h4>
+        <p class="selectedRes__resNumber fw-bold m-0">
+          店家編號{{ temp.resId }}
+        </p>
       </div>
     </div>
-    <ProductItem></ProductItem>
-    <div
-      class="AddToCartModal translate-middle"
-      :class="{ 'd-none': isOpen == false }"
-    >
-      <h4 class="text-primary fw-bold">加入購物車</h4>
-      <img
-        style="max-height: 90px; border-radius: 10px"
-        src="https://images.unsplash.com/photo-1783962211635-ef0af72c7759?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt=""
-      />
-      <h5 class="m-0">起司蛋餅</h5>
-      <p class="text-muted mb-1">單價$NT40</p>
-      <div class="AddToCartModal__numBtnGroup">
-        <a @click.prevent="reduceNum" href=""
-          ><i class="bi bi-dash-circle fs-2"></i
-        ></a>
-        {{ productNum }}
-        <a @click.prevent="productNum++" href=""
-          ><i class="bi bi-plus-circle fs-2"></i
-        ></a>
+    <div class="container p-0 mt-3" style="max-width: 767px">
+      <div class="row row-cols-2 row-cols-md-3 g-3">
+        <div
+          class="col"
+          v-for="product in temp.products"
+          :key="product.productName"
+        >
+          <ProductItem
+            :resName="temp.resName"
+            :resId="temp.resId"
+            :product="product"
+          ></ProductItem>
+        </div>
       </div>
-      <div class="AddToCartModal__submitBtnGroup">
-        <button
-          @click="toggleForm"
-          class="AddToCartModal__submitBtnGroup__cancelBtn btn btn-danger"
+      <div class="d-flex justify-content-center mt-5">
+        <p
+          v-if="temp.products.length == 0"
+          class="m-0 fs-2 fw-bold text-primary"
         >
-          取消
-        </button>
-        <button
-          class="AddToCartModal__submitBtnGroup__confirmBtn btn btn-primary"
-        >
-          確認
-        </button>
+          這邊什麼都沒有QAQ
+        </p>
       </div>
     </div>
-    <div
-      @click.stop.prevent="toggleForm"
-      class="AddToCartModal-overlay"
-      :class="{ 'd-none': isOpen == false }"
-    ></div>
   </div>
 </template>
 <script>
 import ProductItem from "./ProductItem.vue";
+import { mapState } from "pinia";
+import { useBrowseStore } from "../../stores/browseStore.js";
 
 export default {
   components: { ProductItem },
@@ -68,6 +54,9 @@ export default {
       productNum: 1,
       isOpen: false,
     };
+  },
+  computed: {
+    ...mapState(useBrowseStore, ["temp"]),
   },
   methods: {
     reduceNum() {
@@ -104,55 +93,5 @@ export default {
   padding: 5px 10px;
   border-radius: 20px;
   font-size: 14px;
-}
-
-//AddToCartModal
-.AddToCartModal {
-  background-color: $light;
-  border-radius: 20px;
-  padding: 15px;
-  min-width: 300px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1002;
-}
-.AddToCartModal__numBtnGroup {
-  font-size: 24px;
-
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-.AddToCartModal__numBtnGroup a:hover {
-  color: $secondary;
-}
-.AddToCartModal__submitBtnGroup {
-  margin-top: 10px;
-
-  display: flex;
-  gap: 10px;
-}
-.AddToCartModal__submitBtnGroup__cancelBtn,
-.AddToCartModal__submitBtnGroup__confirmBtn {
-  padding: 10px 30px;
-  font-weight: bold;
-}
-.AddToCartModal-overlay {
-  background-color: rgba($color: #000000, $alpha: 0.5);
-  backdrop-filter: blur(10px);
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1001;
 }
 </style>

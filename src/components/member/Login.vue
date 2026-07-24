@@ -8,7 +8,7 @@
           >首次登入將自動為你建立會員。</span
         >
       </p>
-      <button class="loginContent__loginBtn">
+      <button class="loginContent__loginBtn" @click="toggleLoginState">
         <i class="bi bi-line me-2"></i>使用Line登入
       </button>
       <p class="loginContent__text">
@@ -20,9 +20,20 @@
       </p>
     </div>
   </div>
-  <Footer></Footer>
 </template>
-<script></script>
+<script>
+import { mapState, mapActions } from "pinia";
+import { useAuthStore } from "../../stores/authStore";
+
+export default {
+  computed: {
+    ...mapState(useAuthStore, ["hasLoggedIn"]),
+  },
+  methods: {
+    ...mapActions(useAuthStore, ["toggleLoginState"]),
+  },
+};
+</script>
 <style lang="scss">
 .loginBackground {
   text-align: center;
